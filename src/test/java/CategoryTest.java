@@ -6,7 +6,7 @@ public class CategoryTest {
 
   @Before
   public void initialize() {
-    //Category.clear();
+    Category.clear();
     firstCategory = new Category("Inside");
   }
 
@@ -18,5 +18,21 @@ public class CategoryTest {
   @Test
   public void getName_returnsCategoryName_String() {
     assertEquals("Inside", firstCategory.getName());
+  }
+
+  @Test
+  public void all_checksIfCategoryListContainsInstance_true() {
+    assertTrue(Category.all().contains(firstCategory));
+  }
+
+  @Test
+  public void getID_returnsIDNumber_int() {
+    assertEquals(1, firstCategory.getID());
+  }
+
+  @Test
+  public void clear_clearsCategoryList_0() {
+    Category.clear();
+    assertEquals(Category.all().size(), 0);
   }
 }

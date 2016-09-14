@@ -21,4 +21,16 @@ public class Category {
   public String getName() {
     return mName;
   }
+
+  public static List<Category> all() {
+    return instances;
+  }
+
+  public int getID() {
+    return mID;
+  }
+
+  public static void clear() {
+    instances.clear();
+  }
 }
