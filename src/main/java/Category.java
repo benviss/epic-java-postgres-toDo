@@ -33,4 +33,8 @@ public class Category {
   public static void clear() {
     instances.clear();
   }
+
+  public void addTask(Task task) {
+    mTasks.add(task);
+  }
 }

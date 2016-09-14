@@ -3,11 +3,12 @@ import static org.junit.Assert.*;
 
 public class CategoryTest {
   private Category firstCategory;
-
+  private Task testTask;
   @Before
   public void initialize() {
     Category.clear();
     firstCategory = new Category("Inside");
+    testTask = new Task("Make bed");
   }
 
   @Test
@@ -34,5 +35,11 @@ public class CategoryTest {
   public void clear_clearsCategoryList_0() {
     Category.clear();
     assertEquals(Category.all().size(), 0);
+  }
+
+  @Test
+  public void addTask_addsTasksToCategoryList_true() {
+    firstCategory.addTask(testTask);
+    assertTrue(firstCategory.getTasks().contains(testTask));
   }
 }
