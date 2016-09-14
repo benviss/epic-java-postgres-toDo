@@ -49,4 +49,9 @@ public class TaskTest {
   public void getId_tasksInstantiateWithAnID_1() {
     assertEquals(1, firstTask.getID());
   }
+
+  @Test
+  public void find_returnsTaskWithSameId_secondTask() {
+    assertEquals(Task.find(secondTask.getID()), secondTask);
+  }
 }
