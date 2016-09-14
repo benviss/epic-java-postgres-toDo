@@ -1,14 +1,20 @@
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Task {
   private String mDescription;
   private boolean mCompleted;
   private LocalDateTime mCreatedAt;
+  private static List<Task> instances = new ArrayList<Task>();
+  private int mID;
 
   public Task(String description) {
     mDescription = description;
     mCompleted = false;
     mCreatedAt = LocalDateTime.now();
+    instances.add(this);
+    mID = instances.size();
   }
 
   public String getDescription() {
@@ -21,6 +27,18 @@ public class Task {
 
   public LocalDateTime getCreatedAt() {
     return mCreatedAt;
+  }
+
+  public static List<Task> all() {
+    return instances;
+  }
+
+  public static void clear() {
+    instances.clear();
+  }
+
+  public int getID() {
+    return mID;
   }
 
 }
