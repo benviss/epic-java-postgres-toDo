@@ -5,12 +5,17 @@ public class CategoryTest {
   private Category firstCategory;
   private Category secondCategory;
   private Task testTask;
+
   @Before
   public void initialize() {
-    Category.clear();
     firstCategory = new Category("Inside");
     secondCategory = new Category("Outside");
     testTask = new Task("Make bed");
+  }
+
+  @After
+  public void tearDown() {
+    Category.clear();
   }
 
   @Test

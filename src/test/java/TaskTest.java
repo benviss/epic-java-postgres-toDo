@@ -8,9 +8,13 @@ public class TaskTest {
 
   @Before
   public void initialize() {
-    Task.clear();
     firstTask = new Task("Mow the lawn");
     secondTask = new Task("Fly to Mars");
+  }
+
+  @After
+  public void tearDown() {
+    Task.clear();
   }
 
   @Test
