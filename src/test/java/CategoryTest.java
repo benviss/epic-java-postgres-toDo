@@ -3,11 +3,13 @@ import static org.junit.Assert.*;
 
 public class CategoryTest {
   private Category firstCategory;
+  private Category secondCategory;
   private Task testTask;
   @Before
   public void initialize() {
     Category.clear();
     firstCategory = new Category("Inside");
+    secondCategory = new Category("Outside");
     testTask = new Task("Make bed");
   }
 
@@ -17,14 +19,15 @@ public class CategoryTest {
   }
 
   @Test
-  public void getName_returnsCategoryName_String() {
+  public void getName_categoryInstantiatesWithName_Inside() {
     assertEquals("Inside", firstCategory.getName());
   }
 
   @Test
   public void all_checksIfCategoryListContainsInstance_true() {
     assertTrue(Category.all().contains(firstCategory));
-  }
+    assertTrue(Category.all().contains(secondCategory));
+   }
 
   @Test
   public void getID_returnsIDNumber_int() {
@@ -41,5 +44,10 @@ public class CategoryTest {
   public void addTask_addsTasksToCategoryList_true() {
     firstCategory.addTask(testTask);
     assertTrue(firstCategory.getTasks().contains(testTask));
+  }
+
+  @Test
+  public void findCategory_returnsCategoryWithSameID_secondCategory() {
+    assertEquals(Category.find(secondCategory.getID()), secondCategory);
   }
 }

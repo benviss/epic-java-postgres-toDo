@@ -37,4 +37,9 @@ public class Category {
   public void addTask(Task task) {
     mTasks.add(task);
   }
+
+  public static Category find(int id) {
+    return instances.get(id -1);
+  }
+
 }
