@@ -55,4 +55,9 @@ public class CategoryTest {
   public void findCategory_returnsCategoryWithSameID_secondCategory() {
     assertEquals(Category.find(secondCategory.getID()), secondCategory);
   }
+
+  @Test
+  public void find_returnsNullWhenNoTaskFound_null() {
+    assertTrue(Category.find(999) == null);
+  }
 }
