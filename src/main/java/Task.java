@@ -8,11 +8,13 @@ public class Task {
   private boolean completed;
   private LocalDateTime createdAt;
   private int id;
+  private int categoryId;
 
-  public Task(String description) {
+  public Task(String description, int categoryId) {
     this.description = description;
     completed = false;
     createdAt = LocalDateTime.now();
+    this.categoryId = categoryId;
   }
 
   public String getDescription() {
@@ -27,14 +29,18 @@ public class Task {
     return createdAt;
   }
 
+  public int getCategoryId() {
+    return categoryId;
+  }
+
   public static List<Task> all() {
-    String sql = "SELECT id, description FROM tasks";
+    String sql = "SELECT id, description, categoryid FROM tasks";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Task.class);
     }
   }
 
-  public int getID() {
+  public int getId() {
     return id;
   }
 
@@ -52,14 +58,14 @@ public class Task {
       return false;
     } else {
       Task newTask = (Task) otherTask;
-      return this.getDescription().equals(newTask.getDescription()) && this.getID() == newTask.getID();
+      return this.getDescription().equals(newTask.getDescription()) && this.getId() == newTask.getId() && this.getCategoryId() == newTask.getCategoryId();
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO tasks (description) VALUES (:description)";
-      this.id = (int) con.createQuery(sql, true).addParameter("description", this.description).executeUpdate().getKey();
+      String sql = "INSERT INTO tasks (description, categoryid) VALUES (:description, :categoryid)";
+      this.id = (int) con.createQuery(sql, true).addParameter("description", this.description).addParameter("categoryid", this.categoryId).executeUpdate().getKey();
     }
   }
 

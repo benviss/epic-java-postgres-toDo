@@ -9,9 +9,9 @@ public class TaskTest {
 
   @Before
   public void initialize() {
-    firstTask = new Task("Mow the lawn");
+    firstTask = new Task("Mow the lawn", 1);
     firstTask.save();
-    secondTask = new Task("Buy groceries");
+    secondTask = new Task("Buy groceries", 1);
     secondTask.save();
     DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/to_do_test", null, null);
   }
@@ -19,8 +19,10 @@ public class TaskTest {
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String sql ="DELETE FROM tasks *;";
-      con.createQuery(sql).executeUpdate();
+      String deleteTasksQuery = "DELETE FROM tasks *;";
+      String deleteCategoriesQuery = "DELETE FROM categories *;";
+      con.createQuery(deleteTasksQuery).executeUpdate();
+      con.createQuery(deleteCategoriesQuery).executeUpdate();
     }
   }
 
@@ -51,19 +53,19 @@ public class TaskTest {
   }
 
   @Test
-  public void getId_tasksInstantiateWithAnID_1() {
-    assertTrue(firstTask.getID() > 0);
+  public void getId_tasksInstantiateWithAnId_1() {
+    assertTrue(firstTask.getId() > 0);
   }
 
   @Test
   public void find_returnsTaskWithSameId_secondTask() {
-    assertEquals(Task.find(secondTask.getID()), secondTask);
+    assertEquals(Task.find(secondTask.getId()), secondTask);
   }
 
   @Test
   public void equals_returnsTrueIfDescriptionsAreTheSame() {
-    Task thirdTask = new Task("Mow the lawn");
-    Task fourthTask = new Task("Mow the lawn");
+    Task thirdTask = new Task("Mow the lawn", 1);
+    Task fourthTask = new Task("Mow the lawn", 1);
     assertTrue(fourthTask.equals(thirdTask));
   }
 
@@ -75,7 +77,7 @@ public class TaskTest {
   @Test
   public void save_assignsIdToObject() {
     Task savedTask = Task.all().get(0);
-    assertEquals(firstTask.getID(), savedTask.getID());
+    assertEquals(firstTask.getId(), savedTask.getId());
   }
 
 }
