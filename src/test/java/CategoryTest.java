@@ -96,4 +96,12 @@ public class CategoryTest {
     Task[] tasks = new Task[] { fifthTask, sixthTask };
     assertTrue(firstCategory.getTasks().containsAll(Arrays.asList(tasks)));
   }
+
+  @Test
+  public void update_updatesCategoryName_True() {
+    Category fifthCategory = new Category("Garage");
+    fifthCategory.save();
+    fifthCategory.update("Yard");
+    assertEquals("Yard", Category.find(fifthCategory.getId()).getName());
+  }
 }
