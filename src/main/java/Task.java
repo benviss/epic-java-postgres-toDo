@@ -44,6 +44,7 @@ public class Task {
     return id;
   }
 
+
   public static Task find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM tasks where id=:id";
@@ -66,6 +67,16 @@ public class Task {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO tasks (description, categoryid) VALUES (:description, :categoryid)";
       this.id = (int) con.createQuery(sql, true).addParameter("description", this.description).addParameter("categoryid", this.categoryId).executeUpdate().getKey();
+    }
+  }
+
+  public void update(String description) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE tasks SET description = :description Where id = :id";
+      con.createQuery(sql)
+        .addParameter("description", description)
+        .addParameter("id", id)
+        .executeUpdate();
     }
   }
 

@@ -80,4 +80,9 @@ public class TaskTest {
     assertEquals(firstTask.getId(), savedTask.getId());
   }
 
+  @Test
+  public void update_updatesTaskDescription_True() {
+    firstTask.update("Take a nap");
+    assertEquals("Take a nap", Task.find(firstTask.getId()).getDescription());
+  }
 }
