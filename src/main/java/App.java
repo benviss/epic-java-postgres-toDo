@@ -28,6 +28,7 @@ public class App {
     get("/categories/:category_id/tasks/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Category category = Category.find(Integer.parseInt(request.params(":category_id")));
+      Task task = Task.find(Integer.parseInt(request.params(":id")));
       model.put("category", category);
       model.put("task", task);
       model.put("template", "templates/task.vtl");
@@ -36,7 +37,7 @@ public class App {
 
     post("/categories/:category_id/tasks/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Task task = new Task.find(Integer.parseInt(request.params("id")));
+      Task task = Task.find(Integer.parseInt(request.params("id")));
       String description = request.queryParams("description");
       Category category = Category.find(task.getCategoryId());
       task.update(description);

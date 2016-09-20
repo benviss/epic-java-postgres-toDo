@@ -6,14 +6,14 @@ import org.sql2o.*;
 public class Task {
   private String description;
   private boolean completed;
-  private LocalDateTime createdAt;
+  private LocalDateTime created;
   private int id;
   private int categoryId;
 
   public Task(String description, int categoryId) {
     this.description = description;
     completed = false;
-    createdAt = LocalDateTime.now();
+    created = LocalDateTime.now();
     this.categoryId = categoryId;
   }
 
@@ -25,8 +25,8 @@ public class Task {
     return completed;
   }
 
-  public LocalDateTime getCreatedAt() {
-    return createdAt;
+  public LocalDateTime getCreated() {
+    return created;
   }
 
   public int getCategoryId() {

@@ -43,7 +43,7 @@ public class TaskTest {
 
   @Test
   public void getCreatedAt_instantiateWithCurrentTime_today() {
-    assertEquals(LocalDateTime.now().getDayOfWeek(), firstTask.getCreatedAt().getDayOfWeek());
+    assertEquals(LocalDateTime.now().getDayOfWeek(), firstTask.getCreated().getDayOfWeek());
   }
 
   @Test
@@ -85,4 +85,5 @@ public class TaskTest {
     firstTask.update("Take a nap");
     assertEquals("Take a nap", Task.find(firstTask.getId()).getDescription());
   }
+
 }
